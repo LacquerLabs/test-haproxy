@@ -1,0 +1,28 @@
+version: "2"
+services:
+  haproxy:
+    build: 
+      context: ./haproxy
+      dockerfile: ./Dockerfile
+    links:
+      - contentapp
+      - contentads
+    ports:
+      - 80:80
+      - 443:80
+    cpu_shares: 256
+  contentapp:
+    build: 
+      context: ./content_app
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:80
+    cpu_shares: 256
+  contentads:
+    build: 
+      context: ./content_ads
+      dockerfile: ./Dockerfile
+    ports:
+      - 8082:80
+    cpu_shares: 256
+
